@@ -21,7 +21,6 @@ export function FadeIn({
   className,
 }: FadeInProps) {
   const reduce = useReducedMotion();
-
   return (
     <motion.div
       className={className}
