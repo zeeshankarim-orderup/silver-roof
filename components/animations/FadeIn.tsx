@@ -2,7 +2,7 @@
 
 import { motion, useReducedMotion } from 'framer-motion';
 import type { ReactNode } from 'react';
-import { DURATION, VIEWPORT, transition } from '@/lib/motion';
+import { VIEWPORT, transition } from '@/lib/motion';
 
 interface FadeInProps {
   children: ReactNode;
@@ -12,7 +12,6 @@ interface FadeInProps {
   duration?: number;
   className?: string;
 }
-
 /** The workhorse reveal: a short fade with a little upward travel. */
 export function FadeIn({
   children,
