@@ -18,7 +18,6 @@ export function FadeIn({
   children,
   y = 24,
   delay = 0,
-  duration = DURATION.base,
   className,
 }: FadeInProps) {
   const reduce = useReducedMotion();

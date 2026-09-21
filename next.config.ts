@@ -1,22 +1,16 @@
-import type { NextConfig } from "next";
+import type { NextConfig } from 'next';
 
 const nextConfig: NextConfig = {
   reactStrictMode: true,
-  output: "export",
-   trailingSlash: true,
   images: {
-    formats: ["image/avif", "image/webp"],
+    formats: ['image/avif', 'image/webp'],
+    // Add remote hosts here if project photos are served from a CDN or CMS.
     remotePatterns: [],
-    unoptimized: true,
   },
-  devIndicators: false,
   async redirects() {
     return [
-      {
-        source: "/",
-        destination: "/en",
-        permanent: false,
-      },
+      // Every route lives under /en or /ar. Send the bare root to the default locale.
+      { source: '/', destination: '/en', permanent: false },
     ];
   },
 };

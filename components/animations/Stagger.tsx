@@ -38,7 +38,7 @@ interface StaggerItemProps {
   duration?: number;
 }
 
-export function StaggerItem({ children, className, duration = DURATION.base }: StaggerItemProps) {
+export function StaggerItem({ children, className, }: StaggerItemProps) {
   const reduce = useReducedMotion();
 
   return (
