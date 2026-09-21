@@ -1,8 +1,8 @@
-'use client';
+"use client";
 
-import { motion, useReducedMotion } from 'framer-motion';
-import type { ReactNode } from 'react';
-import { DURATION, VIEWPORT, fadeUp, staggerParent, transition } from '@/lib/motion';
+import { motion, useReducedMotion } from "framer-motion";
+import type { ReactNode } from "react";
+import { VIEWPORT, fadeUp, staggerParent, transition } from "@/lib/motion";
 
 interface StaggerContainerProps {
   children: ReactNode;
@@ -38,13 +38,15 @@ interface StaggerItemProps {
   duration?: number;
 }
 
-export function StaggerItem({ children, className, }: StaggerItemProps) {
+export function StaggerItem({ children, className }: StaggerItemProps) {
   const reduce = useReducedMotion();
 
   return (
     <motion.div
       className={className}
-      variants={reduce ? { hidden: { opacity: 0 }, visible: { opacity: 1 } } : fadeUp}
+      variants={
+        reduce ? { hidden: { opacity: 0 }, visible: { opacity: 1 } } : fadeUp
+      }
       transition={transition(0.55)}
     >
       {children}

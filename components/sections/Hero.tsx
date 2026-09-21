@@ -1,6 +1,6 @@
 import { MapPin, Phone } from "lucide-react";
 import { HeroBackdrop } from "./HeroBackdrop";
-import { FadeIn, Reveal } from "@/components/animations";
+import { FadeIn } from "@/components/animations";
 import { Button } from "@/components/ui/Button";
 import type { Dictionary } from "@/i18n/dictionaries";
 import { telHref, whatsappHref } from "@/lib/site";

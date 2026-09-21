@@ -1,7 +1,7 @@
 import type { Locale, Direction } from '@/types';
 
 export const locales: Locale[] = ['en', 'ar'];
-export const defaultLocale: Locale = 'en';
+export const defaultLocale: Locale = 'ar';
 
 export const localeDirection: Record<Locale, Direction> = {
   en: 'ltr',
