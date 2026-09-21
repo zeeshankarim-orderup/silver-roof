@@ -10,7 +10,7 @@ const nextConfig: NextConfig = {
   async redirects() {
     return [
       // Every route lives under /en or /ar. Send the bare root to the default locale.
-      { source: '/', destination: '/en', permanent: false },
+      { source: '/', destination: '/ar', permanent: false },
     ];
   },
 };
