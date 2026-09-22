@@ -94,23 +94,8 @@ export function Contact({ dict, locale }: { dict: Dictionary; locale: Locale }) 
                   <span className="block">
                     <span className="block text-sm text-graphite-400">{dict.contact.address}</span>
                     <span className="mt-1 block text-lg leading-relaxed text-graphite-900">
-                      {address.street}
-                      <br />
                       {isAr ? address.cityAr : address.city},{' '}
                       {isAr ? address.countryNameAr : address.countryName}
-                    </span>
-                  </span>
-                </li>
-
-                <li className="flex items-start gap-4 py-5">
-                  <Clock className="mt-1 h-5 w-5 shrink-0 text-graphite-400" aria-hidden="true" />
-                  <span className="block">
-                    <span className="block text-sm text-graphite-400">{dict.contact.hours}</span>
-                    <span className="mt-1 block text-lg text-graphite-900">
-                      {isAr ? hours.weekdaysAr : hours.weekdays} · {hours.time}
-                    </span>
-                    <span className="mt-1 block text-sm text-graphite-400">
-                      {dict.contact.hoursClosed}: {isAr ? hours.closedAr : hours.closed}
                     </span>
                   </span>
                 </li>
