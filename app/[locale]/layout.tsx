@@ -1,16 +1,21 @@
-import type { Metadata, Viewport } from 'next';
-import type { ReactNode } from 'react';
-import { Cormorant_Garamond, IBM_Plex_Sans_Arabic, Inter } from 'next/font/google';
-import { notFound } from 'next/navigation';
-import { DirectionProvider } from '@/components/providers/DirectionProvider';
-import { Footer } from '@/components/layout/Footer';
-import { Header } from '@/components/layout/Header';
-import { FloatingWhatsApp } from '@/components/layout/FloatingWhatsApp';
-import { getDirection, isLocale, locales } from '@/i18n/config';
-import { getDictionary } from '@/i18n/dictionaries';
-import { buildMetadata } from '@/lib/seo';
-import type { Locale } from '@/types';
-import '@/styles/globals.css';
+import type { Metadata, Viewport } from "next";
+import type { ReactNode } from "react";
+import {
+  Cormorant_Garamond,
+  IBM_Plex_Sans_Arabic,
+  Inter,
+} from "next/font/google";
+import { notFound } from "next/navigation";
+import { DirectionProvider } from "@/components/providers/DirectionProvider";
+import { Footer } from "@/components/layout/Footer";
+import { Header } from "@/components/layout/Header";
+import { FloatingWhatsApp } from "@/components/layout/FloatingWhatsApp";
+import { getDirection, isLocale, locales } from "@/i18n/config";
+import { getDictionary } from "@/i18n/dictionaries";
+import { buildMetadata } from "@/lib/seo";
+import type { Locale } from "@/types";
+import "@/styles/globals.css";
+import Script from "next/script";
 
 /**
  * Display serif for headlines, neutral grotesk for everything else, and a
@@ -18,23 +23,23 @@ import '@/styles/globals.css';
  * equivalent that would read as premium at headline size.
  */
 const display = Cormorant_Garamond({
-  subsets: ['latin'],
-  weight: ['300', '400', '500', '600'],
-  variable: '--font-display',
-  display: 'swap',
+  subsets: ["latin"],
+  weight: ["300", "400", "500", "600"],
+  variable: "--font-display",
+  display: "swap",
 });
 
 const sans = Inter({
-  subsets: ['latin'],
-  variable: '--font-sans',
-  display: 'swap',
+  subsets: ["latin"],
+  variable: "--font-sans",
+  display: "swap",
 });
 
 const arabic = IBM_Plex_Sans_Arabic({
-  subsets: ['arabic'],
-  weight: ['300', '400', '500', '600'],
-  variable: '--font-arabic',
-  display: 'swap',
+  subsets: ["arabic"],
+  weight: ["300", "400", "500", "600"],
+  variable: "--font-arabic",
+  display: "swap",
 });
 
 export const dynamicParams = false;
@@ -45,10 +50,10 @@ export function generateStaticParams() {
 
 export const viewport: Viewport = {
   themeColor: [
-    { media: '(prefers-color-scheme: light)', color: '#FBF9F5' },
-    { media: '(prefers-color-scheme: dark)', color: '#1B1D1E' },
+    { media: "(prefers-color-scheme: light)", color: "#FBF9F5" },
+    { media: "(prefers-color-scheme: dark)", color: "#1B1D1E" },
   ],
-  width: 'device-width',
+  width: "device-width",
   initialScale: 1,
 };
 
@@ -94,6 +99,20 @@ export default async function LocaleLayout({
           />
         </DirectionProvider>
       </body>
+      {/* Google Analytics */}
+      <Script
+        src="https://www.googletagmanager.com/gtag/js?id=G-GL4QQW6ZFY"
+        strategy="afterInteractive"
+      />
+
+      <Script id="google-analytics" strategy="afterInteractive">
+        {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){window.dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-GL4QQW6ZFY');
+          `}
+      </Script>
     </html>
   );
 }
