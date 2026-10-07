@@ -89,6 +89,24 @@ export default async function LocaleLayout({
       suppressHydrationWarning
     >
       <body className="min-h-screen bg-bone">
+        <Script id="google-ads-navigation-helper" strategy="afterInteractive">
+          {`
+    function gtagSendEvent(url) {
+      var callback = function () {
+        if (typeof url === 'string') {
+          window.location = url;
+        }
+      };
+
+      gtag('event', 'ads_conversion_Book_appointment_1', {
+        event_callback: callback,
+        event_timeout: 2000
+      });
+
+      return false;
+    }
+  `}
+        </Script>
         <DirectionProvider locale={locale} dir={dir}>
           <Header locale={locale} dict={dict} />
           <main id="main">{children}</main>
@@ -99,20 +117,6 @@ export default async function LocaleLayout({
           />
         </DirectionProvider>
       </body>
-      {/* Google Analytics */}
-      <Script
-        src="https://www.googletagmanager.com/gtag/js?id=G-GL4QQW6ZFY"
-        strategy="afterInteractive"
-      />
-
-      <Script id="google-analytics" strategy="afterInteractive">
-        {`
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){window.dataLayer.push(arguments);}
-            gtag('js', new Date());
-            gtag('config', 'G-GL4QQW6ZFY');
-          `}
-      </Script>
     </html>
   );
 }
