@@ -117,28 +117,31 @@ both languages. `lib/analytics.ts` sends these events through `gtag`:
 
 Track the click on this website, not a page view on `api.whatsapp.com` or `wa.me`.
 Those domains belong to WhatsApp, so our Google tag cannot be installed there.
-All WhatsApp CTAs, including the footer and floating button, send `whatsapp_click`.
+All WhatsApp CTAs, including the footer and floating button, send `whatsapp_click`
+for analytics and `conversion_event_contact_1` for the manually configured Google
+conversion. The latter name matches the event snippet supplied by Google.
 Links continue to open WhatsApp in a new tab. Event metadata excludes contact URLs
 and pre-filled message text.
 
 1. Deploy the website changes and use your own website domain when Google asks
    where to detect the tag (for example, `https://silverroof.net`).
-2. Click a WhatsApp CTA and check for `whatsapp_click` in GA4 Realtime or use
+2. Click a WhatsApp CTA and check for `conversion_event_contact_1` using
    Google Tag Assistant / GA4 DebugView. Test both `/en` and `/ar`, including
    the hero, footer, contact, mobile menu and floating buttons.
-3. In the GA4 property for `G-GL4QQW6ZFY`, mark `whatsapp_click` as a key event
-   under Admin > Data display > Events. Link the Google Ads account under
-   Admin > Product links > Google Ads links.
-4. In Google Ads, open Goals > Conversions > Summary > Create conversion action,
-   select the linked Google Analytics property and select `whatsapp_click`.
-   Newly linked accounts/key events can take 24–48 hours to become available.
-5. Name it "WhatsApp button click", use the Contact category and One counting
+3. Finish the manual conversion setup that generated `conversion_event_contact_1`
+   and verify the conversion's status in Google Ads. The repository sends the
+   supplied event; the account must associate that event with the conversion.
+4. Name it "WhatsApp button click", use the Contact category and One counting
    method for leads. Set it as Primary if campaigns should optimize for this
    action, and ensure the campaign uses the corresponding conversion goal.
 
 This counts a click to open WhatsApp, not a confirmed conversation or qualified
-lead. Do not also import the generic outbound `click` event or add a second
-primary Ads conversion for the same WhatsApp click, which would double-count it.
+lead. Keep `whatsapp_click` as an analytics event; do not also import it or the
+generic outbound `click` as another primary Ads conversion for the same click.
+If the earlier `whatsapp_click` conversion was already imported, make it Secondary
+or remove it from the campaign's bidding goals to avoid duplicate optimization.
+The delayed navigation helper from Google's snippet is unnecessary because the
+links open a new tab and leave this website open to send the event.
 No Google Ads account configuration is performed by this repository.
 
 Google documentation: [Create conversions from GA4 key events](https://support.google.com/analytics/answer/14710559)

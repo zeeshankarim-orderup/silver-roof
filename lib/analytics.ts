@@ -1,6 +1,6 @@
 /**
  * Sends contact events to the Google tag installed in app/[locale]/layout.tsx.
- * Mark whatsapp_click as a GA4 key event and import it into Google Ads.
+ * WhatsApp clicks also send Google's configured conversion_event_contact_1.
  * This measures opening WhatsApp, not a message being sent.
  */
 
@@ -34,4 +34,14 @@ export function track(event: ConversionEvent, params: Record<string, unknown> = 
     if (typeof params[key] === 'string') metadata[key] = params[key];
   }
   window.gtag('event', event, { ...metadata, send_to: 'G-GL4QQW6ZFY' });
+
+  if (event === 'whatsapp_click') {
+    // Match the event name supplied by Google's manual conversion setup.
+    // WhatsApp opens in a new tab, so the website stays open to send the event;
+    // a delayed window.location callback would also redirect the original tab.
+    window.gtag('event', 'conversion_event_contact_1', {
+      ...metadata,
+      event_timeout: 2000,
+    });
+  }
 }
