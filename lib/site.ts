@@ -19,7 +19,7 @@ export const site = {
   /** Human readable version shown in the UI. PLACEHOLDER */
   phoneDisplay: "+966 56 265 4119",
   /** Digits only, no plus sign - wa.me requires this format. PLACEHOLDER */
-  whatsapp: "966567799727",
+  whatsapp: "966562654119",
   email: "silverroof777@gmail.com", // PLACEHOLDER
   address: {
     street: "Street name, District", // PLACEHOLDER
@@ -63,7 +63,7 @@ export const mailHref = `mailto:${site.email}`;
 
 /** Builds a wa.me link with an optional pre-filled message. */
 export function whatsappHref(message?: string): string {
-  const base = `https://wa.me/${site.whatsapp}`;
+  const base = `https://wa.me/message/YNFI7QXNXSIDN1`;
   return message ? `${base}?text=${encodeURIComponent(message)}` : base;
 }
 

@@ -41,7 +41,7 @@ export const en = {
     scroll: "Scroll",
     marquee: ["Aluminum", "Glass", "Shutters", "Painting"],
     whatsappMessage:
-      "Hello Silver Roof, I would like to ask about aluminum works for my project in Jeddah.",
+      "Hello Silver Roof, I would like to ask about maintainance for my project.",
   },
 
   services: {
@@ -224,7 +224,7 @@ export const en = {
     imageAlt:
       "Modern villa elevation with full-height aluminum glazing at dusk",
     whatsappMessage:
-      "Hello Silver Roof, I am planning a project and would like a quote.",
+      "Hello Silver Roof, I would like to ask about maintainance for my project.",
   },
 
   contact: {
