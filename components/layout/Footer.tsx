@@ -2,6 +2,7 @@ import { Ghost, Instagram, Link2, Linkedin, Mail, MapPin, Music2, Phone, Twitter
 import Link from 'next/link';
 import type { LucideIcon } from 'lucide-react';
 import { Logo } from '@/components/ui/Logo';
+import { TrackedLink } from '@/components/ui/TrackedLink';
 import { navigation } from '@/data/navigation';
 import { services } from '@/data/services';
 import type { Dictionary } from '@/i18n/dictionaries';
@@ -142,14 +143,14 @@ export function Footer({ locale, dict }: FooterProps) {
               </li>
             </ul>
 
-            <a
+            <TrackedLink
               href={whatsappHref(dict.hero.whatsappMessage)}
-              target="_blank"
-              rel="noopener noreferrer"
+              event="whatsapp_click"
+              source="footer"
               className="mt-6 inline-flex h-11 items-center justify-center rounded-frame border border-bone/20 px-5 text-sm text-bone transition-colors duration-300 ease-architectural hover:border-bone/50 hover:bg-bone hover:text-graphite-900"
             >
               {dict.common.chatOnWhatsapp}
-            </a>
+            </TrackedLink>
           </div>
         </div>
 

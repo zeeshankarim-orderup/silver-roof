@@ -104,7 +104,8 @@ in `lib/validation.ts`, and there is a honeypot field that silently absorbs bots
 
 ## Adding analytics and ad conversions
 
-`lib/analytics.ts` is a `dataLayer` shim. It is already wired to the CTAs and pushes:
+The GA4 Google tag `G-GL4QQW6ZFY` is installed in `app/[locale]/layout.tsx` for
+both languages. `lib/analytics.ts` sends these events through `gtag`:
 
 - `quote_request_submit` — form submitted
 - `quote_request_success` — delivery confirmed
@@ -112,13 +113,36 @@ in `lib/validation.ts`, and there is a honeypot field that silently absorbs bots
 - `phone_click`
 - `email_click`
 
-No tags are installed. To turn tracking on:
+### WhatsApp conversions in Google Ads
 
-1. Add the GTM or gtag snippet in `app/[locale]/layout.tsx` using `next/script`.
-2. Set `NEXT_PUBLIC_GTM_ID` (and/or `NEXT_PUBLIC_GA_ID`, `NEXT_PUBLIC_META_PIXEL_ID`) in `.env.local`.
-3. Map the event names above to conversions in Google Ads / Meta Events Manager.
+Track the click on this website, not a page view on `api.whatsapp.com` or `wa.me`.
+Those domains belong to WhatsApp, so our Google tag cannot be installed there.
+All WhatsApp CTAs, including the footer and floating button, send `whatsapp_click`.
+Links continue to open WhatsApp in a new tab. Event metadata excludes contact URLs
+and pre-filled message text.
 
-Because the events are already fired from components, none of this requires editing sections.
+1. Deploy the website changes and use your own website domain when Google asks
+   where to detect the tag (for example, `https://silverroof.net`).
+2. Click a WhatsApp CTA and check for `whatsapp_click` in GA4 Realtime or use
+   Google Tag Assistant / GA4 DebugView. Test both `/en` and `/ar`, including
+   the hero, footer, contact, mobile menu and floating buttons.
+3. In the GA4 property for `G-GL4QQW6ZFY`, mark `whatsapp_click` as a key event
+   under Admin > Data display > Events. Link the Google Ads account under
+   Admin > Product links > Google Ads links.
+4. In Google Ads, open Goals > Conversions > Summary > Create conversion action,
+   select the linked Google Analytics property and select `whatsapp_click`.
+   Newly linked accounts/key events can take 24–48 hours to become available.
+5. Name it "WhatsApp button click", use the Contact category and One counting
+   method for leads. Set it as Primary if campaigns should optimize for this
+   action, and ensure the campaign uses the corresponding conversion goal.
+
+This counts a click to open WhatsApp, not a confirmed conversation or qualified
+lead. Do not also import the generic outbound `click` event or add a second
+primary Ads conversion for the same WhatsApp click, which would double-count it.
+No Google Ads account configuration is performed by this repository.
+
+Google documentation: [Create conversions from GA4 key events](https://support.google.com/analytics/answer/14710559)
+and [set up web conversions](https://support.google.com/google-ads/answer/16560108).
 
 ---
 
